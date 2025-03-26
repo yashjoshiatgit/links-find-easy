@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Link Manager</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Profile Link Manager</h1>
+      <nav class="tabs">
+        <button id="tab-links" class="tab-button active">
+          <i class="fas fa-link"></i> My Links
+        </button>
+        <button id="tab-autofill" class="tab-button">
+          <i class="fas fa-magic"></i> Autofill
+        </button>
+        <button id="tab-settings" class="tab-button">
+          <i class="fas fa-cog"></i> Settings
+        </button>
+      </nav>
+    </header>
+
+    <div id="links-section" class="tab-content active">
+      <div class="search-bar">
+        <input type="text" id="search-links" placeholder="Search links...">
+        <i class="fas fa-search"></i>
+      </div>
+
+      <div class="links-container">
+        <!-- Links will be populated here dynamically -->
+      </div>
+
+      <button id="add-link-btn" class="primary-btn">
+        <i class="fas fa-plus"></i> Add New Link
+      </button>
+    </div>
+
+    <div id="autofill-section" class="tab-content">
+      <div class="autofill-status">
+        <span id="detection-status">Scanning page for form fields...</span>
+      </div>
+      
+      <div class="detected-fields">
+        <!-- Detected fields will be listed here -->
+      </div>
+      
+      <div class="autofill-actions">
+        <button id="autofill-all-btn" class="primary-btn" disabled>
+          <i class="fas fa-magic"></i> Autofill All
+        </button>
+      </div>
+    </div>
+
+    <div id="settings-section" class="tab-content">
+      <div class="settings-option">
+        <label for="auto-detect">
+          <input type="checkbox" id="auto-detect" checked>
+          Automatically detect form fields
+        </label>
+      </div>
+      
+      <div class="settings-option">
+        <label for="show-notifications">
+          <input type="checkbox" id="show-notifications" checked>
+          Show notifications
+        </label>
+      </div>
+      
+      <div class="export-import">
+        <button id="export-btn" class="secondary-btn">
+          <i class="fas fa-file-export"></i> Export Links
+        </button>
+        <button id="import-btn" class="secondary-btn">
+          <i class="fas fa-file-import"></i> Import Links
+        </button>
+      </div>
+      
+      <div class="danger-zone">
+        <h3>Danger Zone</h3>
+        <button id="clear-all-btn" class="danger-btn">
+          <i class="fas fa-trash"></i> Clear All Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for adding/editing links -->
+  <div id="link-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modal-title">Add New Link</h2>
+      
+      <form id="link-form">
+        <div class="form-group">
+          <label for="platform-select">Platform</label>
+          <select id="platform-select">
+            <option value="linkedin">LinkedIn</option>
+            <option value="github">GitHub</option>
+            <option value="portfolio">Portfolio/Website</option>
+            <option value="twitter">Twitter</option>
+            <option value="medium">Medium</option>
+            <option value="dribbble">Dribbble</option>
+            <option value="codeforces">Codeforces</option>
+            <option value="leetcode">LeetCode</option>
+            <option value="hackerrank">HackerRank</option>
+            <option value="behance">Behance</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+
+        <div id="custom-platform-field" class="form-group hidden">
+          <label for="custom-platform">Custom Platform Name</label>
+          <input type="text" id="custom-platform" placeholder="Enter platform name">
+        </div>
+        
+        <div class="form-group">
+          <label for="platform-url">URL</label>
+          <input type="url" id="platform-url" placeholder="https://..." required>
+        </div>
+        
+        <div class="form-group">
+          <label for="display-name">Display Name (Optional)</label>
+          <input type="text" id="display-name" placeholder="e.g., My GitHub Profile">
+        </div>
+
+        <div class="form-group">
+          <label for="keywords">Keywords for Autofill (Comma separated)</label>
+          <input type="text" id="keywords" placeholder="e.g., github, git, repository">
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" id="cancel-btn" class="secondary-btn">Cancel</button>
+          <button type="submit" id="save-link-btn" class="primary-btn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
